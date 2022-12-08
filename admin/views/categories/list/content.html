@@ -1,0 +1,46 @@
+{{ define "content" }}
+
+
+  <h2>
+    Categories!
+    <a href="/admin" class="btn btn-outline-primary float-right"><i class="fa fa-arrow-left"></i> Posts!</a>
+  </h2>
+
+    <form action="/admin/categories/add" method="post">
+      <div class="input-group">
+        <input type="text" name="category-title" class="form-control" placeholder="Category Name!">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-success">Save!</button>
+        </div>
+      </div>
+    </form>
+<hr>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Category Name</th>
+      <th scope="col">Slug</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{ range $index, $value := .Categories }}
+    <tr>
+      <th scope="row">{{ $value.ID }}</th>
+      <td>{{ $value.Title }}</td>
+      <td>{{ $value.Slug }}</td>
+      <td>{{ $value.CreatedAt }}</td>
+      <td>
+        <a href="#" class="btn btn-outline-warning"><i class="fa fa-pen"></i></a>
+        <a href="/admin/categories/delete/{{ $value.ID }}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+      </td>
+    </tr>
+    {{ end }}
+    </tbody>
+  </table>
+
+
+{{ end }}
